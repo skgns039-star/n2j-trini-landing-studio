@@ -1,0 +1,8 @@
+import type { Widget } from "./agent/types";
+
+// Only this reviewed bootstrap may communicate with the embedding page.
+export function previewDocument(widget: Widget, nonce: string) {
+  const boot = `(()=>{let failed=false;const send=()=>{const root=document.getElementById(${JSON.stringify(widget.namespace)});if(!root)return;const width=document.documentElement.clientWidth;const bad=[...root.querySelectorAll('*')].some(el=>{const r=el.getBoundingClientRect();return r.width>0&&(r.right>width+1||r.left < -1)});parent.postMessage({type:'n2j-measure',nonce:${JSON.stringify(nonce)},ok:!bad&&!failed,height:Math.ceil(root.getBoundingClientRect().height),width},'*')};addEventListener('load',send);addEventListener('resize',send);addEventListener('error',()=>{failed=true;parent.postMessage({type:'n2j-measure',nonce:${JSON.stringify(nonce)},ok:false,height:0,width:innerWidth},'*')});new ResizeObserver(send).observe(document.documentElement);setTimeout(send,100)})()`;
+  return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${nonce}'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'"><style>body{margin:0} ${widget.css}</style></head><body>${widget.html}<script nonce="${nonce}">${boot}</script><script nonce="${nonce}">${widget.js}</script></body></html>`;
+}
+export function bundle(widget: Widget) { return `${widget.html}\n<style>${widget.css}</style>${widget.js ? `\n<script>${widget.js}</script>` : ""}`; }

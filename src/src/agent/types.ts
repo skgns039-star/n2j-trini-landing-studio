@@ -1,0 +1,11 @@
+import type { Input } from "./input";
+export type { Input };
+export type Stage = "A1" | "A2" | "A3" | "A4";
+export type Brief = { industry: string; brand_name: string; target_persona: string; value_props: string[]; tone: Input["tone"]; cta_goal: string; keywords: string[]; inferred: {field:string;value:string;reason:string}[] };
+export type Blueprint = {design:{genre:string;theme_mode:string;macrostructure:string;palette_id:string;typography_id:string;motion:string;rationale:string};sections:{id:string;type:string;headline:string;subcopy:string;elements:{kind:string;text:string;asset_id:string|null;target_section_id:string|null}[];order:number;layout:string}[];layout_rationale:string;missing_content:string[]};
+export type Widget = {html:string;css:string;js:string;namespace:string;install_target:"imweb-body-code-widget";interaction_ids:string[];asset_ids:string[]};
+export const axes = ["philosophy","hierarchy","execution","specificity","restraint","variety"] as const;
+export type Defect = {code:string;severity:"Critical"|"Major"|"Minor";source:string;location:string;evidence:string;repair_target:string};
+export type Findings = {scores:Record<typeof axes[number],number>;score_evidence:Record<typeof axes[number],{location:string;observation:string}>;defects:Defect[]};
+export type Audit = Findings & {pass:boolean;technical_status:"pass"|"fail"|"not_run";hallmark_status:"pass"|"fail"|"not_run";render_status:string;evidence_level:string;profile_version:string;artifact_hash:string};
+export type Artifact = {widget:Widget;brief:Brief;blueprint:Blueprint;audit:Audit};
