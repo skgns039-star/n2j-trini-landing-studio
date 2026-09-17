@@ -9,7 +9,7 @@ const result = await build({
 });
 const css = await readFile("styles.css", "utf8");
 const js = result.outputFiles[0].text.replace(/<\/script/gi, "<\\/script");
-const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="N2J TRINI — 브랜드 템플릿 편집, 미리보기와 HTML 저장. AI 신규 생성은 미연결입니다."><title>N2J TRINI · 브랜드 랜딩 스튜디오</title><style>${css}</style></head><body><div id="root"></div><noscript>예시 체험에는 JavaScript가 필요합니다.</noscript><script>${js}</script></body></html>`;
+const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="N2J TRINI — 입력을 이 Mac의 실제 Codex 생성기로 전달합니다. 공개 고객용 AI 서버는 아직 연결되지 않았습니다."><title>N2J TRINI · 브랜드 랜딩 스튜디오</title><style>${css}</style></head><body><div id="root"></div><noscript>예시 체험에는 JavaScript가 필요합니다.</noscript><script>${js}</script></body></html>`;
 await writeFile("index.html", html);
 
 // Export the authored HTML/CSS examples, without any runtime or model code.
