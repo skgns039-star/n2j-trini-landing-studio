@@ -1,13 +1,14 @@
 # N2J TRINI — 브랜드 랜딩 스튜디오
 
-브랜드 입력을 HTTPS 생성기로 전달합니다. 소유자 인증 후 실제 Codex로 새 페이지를 만들고 결과를 공유할 수 있습니다. 생성 주소: https://n2j-trini.n2jtrini.workers.dev/
+브랜드 입력을 HTTPS 생성기로 전달합니다. OpenAI API로 새 페이지를 만들고 결과를 공유합니다. 고객용: https://n2j-trini.n2jtrini.workers.dev/create · 소유자 테스트: https://n2j-trini.n2jtrini.workers.dev/test
 
-`src/generator-config.ts`에 실제 생성 왕복 검증을 마친 HTTPS 주소를 연결했습니다. 인증정보는 번들에 포함하지 않습니다. 현재 익명 고객의 자동 생성은 제공하지 않으며, 소유자 실행 창과 Mac 실행 상태에 따라 사용할 수 있습니다.
+`src/generator-config.ts`에 HTTPS 생성 주소를 연결했습니다. 인증정보는 번들에 포함하지 않습니다. 고객 화면은 별도 소유자 인증 없이 사용합니다. Windows/Mac 브라우저에서 접속할 수 있으며, 실행 창·예산 제한·Mac 실행부 상태에 따라 생성 가능 여부를 표시합니다. API 키와 테스트 접속 코드는 공개 번들에 포함하지 않습니다.
 
 ## 파일
 
 - `index.html`: CSS와 실행 코드를 포함한 단일 HTML. 다운로드 후 브라우저에서 열 수 있습니다.
 - `examples/cafe.html`, `academy.html`, `nail.html`: 직접 작성한 가상 브랜드 예시.
+- `examples/generated-bakery.html`: 가상의 빵공방 입력으로 gpt-5.4-mini가 실제 생성한 API 시험 결과. 생성·코드 검수 및 1440/375/320 화면 검사를 통과했습니다. 공개 웹 요청부터 다운로드까지의 전체 API 경로 검증은 별도입니다.
 - `src/app/workbench.tsx`: 화면과 문구 수정.
 - `src/src/presets.ts`: 예시의 문구·HTML·CSS 수정.
 - `styles.css`: 서비스 화면 스타일. 기존 앱의 컴파일된 CSS와 편집용 스타일입니다.
